@@ -1,9 +1,10 @@
+"use client";
 import { motion } from 'motion/react';
 import { Mail, MapPin, Phone, ArrowRight } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-charcoal text-gray-400 pt-48 pb-12 border-t border-white/5 relative overflow-hidden mt-32">
+    <footer className="bg-charcoal text-gray-400 pt-20 pb-12 border-t border-white/5 relative overflow-hidden mt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* CTA Banner - Overlapping */}
@@ -11,7 +12,7 @@ export default function Footer() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-charcoal-light rounded-[2.5rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between shadow-2xl border border-white/5 absolute left-4 right-4 sm:left-6 sm:right-6 lg:left-8 lg:right-8 -top-32 group overflow-hidden"
+          className="bg-charcoal-light rounded-[2.5rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between shadow-2xl border border-white/5 relative mb-20 group overflow-hidden z-20"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-electric-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
           <div className="relative z-10">
@@ -23,15 +24,15 @@ export default function Footer() {
           </button>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20 mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
           {/* Company Info */}
-          <div>
+          <div className="lg:col-span-2 pr-8">
             <div className="flex items-center mb-8 cursor-pointer group">
-              <div className="w-[340px] h-24 flex items-center justify-center rounded-xl bg-white overflow-hidden flex-shrink-0 -ml-2">
+              <div className="w-[280px] h-20 flex items-center justify-center rounded-xl bg-white overflow-hidden flex-shrink-0 -ml-2">
                 <img src="https://res.cloudinary.com/kewalkhondekar/image/upload/v1774897473/labs/om-sai-electrical/om-sai-electrical-logo_ynrnqi.png" alt="Om Sai Electrical Logo" className="w-full h-full object-contain scale-[2.2]" />
               </div>
             </div>
-            <p className="text-sm leading-relaxed font-light text-gray-500 mb-6">
+            <p className="text-sm leading-relaxed font-light text-gray-500 mb-6 max-w-sm">
               Authorized ABB Channel Partner delivering premium automation solutions, VFDs, PLCs, and custom control panels for enterprise industries.
             </p>
             <div className="text-xs font-medium text-electric-teal tracking-widest uppercase">
@@ -40,7 +41,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="lg:col-span-1">
             <h4 className="text-white font-display font-semibold text-lg mb-8 tracking-wide">Quick Links</h4>
             <ul className="space-y-4 text-sm font-light">
               {['Home', 'About Us', 'Clientele', 'Career', 'Contact Us', 'Enquiry'].map((link) => (
@@ -55,7 +56,7 @@ export default function Footer() {
           </div>
 
           {/* Products */}
-          <div>
+          <div className="lg:col-span-1">
             <h4 className="text-white font-display font-semibold text-lg mb-8 tracking-wide">Products</h4>
             <ul className="space-y-4 text-sm font-light">
               {['ABB Drives', 'ABB PLC', 'ABB Soft Starters', 'ABB Switchgears', 'Control Panels', 'SCADA Systems'].map((product) => (
@@ -70,7 +71,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="lg:col-span-1">
             <h4 className="text-white font-display font-semibold text-lg mb-8 tracking-wide">Contact</h4>
             <ul className="space-y-6 text-sm font-light">
               <li className="flex items-start">

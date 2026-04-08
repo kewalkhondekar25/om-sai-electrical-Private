@@ -1,69 +1,102 @@
-import { motion } from 'motion/react';
+"use client";
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
+
+const CAROUSEL_SLIDES = [
+  {
+    image: '/images/AC drum manufacturing system machine and automation.jpg',
+    title: 'ABB Authorised',
+    highlight: 'Channel Partner',
+    description: 'Delivering cutting-edge automation solutions, VFDs, PLCs, and custom control panels to optimize your industrial processes with precision.'
+  },
+  {
+    image: '/images/Pharma company water distributor panel.jpg',
+    title: 'Advanced PLC &',
+    highlight: 'Drive Systems',
+    description: 'State-of-the-art programmable logic controllers and variable frequency drives for seamless industrial operations.'
+  },
+  {
+    image: '/images/Soap line automation plant1.jpg',
+    title: 'Industrial',
+    highlight: 'Automation',
+    description: 'End-to-end automation solutions from concept to commissioning for diverse manufacturing sectors.'
+  },
+  {
+    image: '/images/BA gallery fire training system.jpg',
+    title: 'Custom Control',
+    highlight: 'Panels',
+    description: 'Expertly designed and manufactured control panels meeting the highest international safety and quality standards.'
+  }
+];
 
 export default function Hero() {
-  return (
-    <div className="relative bg-charcoal overflow-hidden min-h-[700px] flex items-center">
-      {/* Geometric Gradient Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-teal-900/40 via-charcoal to-charcoal"></div>
-      
-      {/* Subtle grid overlay for tech feel */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Text Content */}
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
+    }, 6000); // Change slide every 6 seconds
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="relative bg-charcoal overflow-hidden min-h-[85vh] flex items-center justify-center">
+      {/* Background Image Carousel */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 0.5, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={CAROUSEL_SLIDES[currentSlide].image}
+              alt={CAROUSEL_SLIDES[currentSlide].title}
+              fill
+              className="object-cover"
+              priority
+            />
+          </motion.div>
+        </AnimatePresence>
+        {/* Dark gradient overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal/90"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-20 flex flex-col items-center text-center mt-10">
+        <AnimatePresence mode="wait">
           <motion.div 
+            key={currentSlide}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-white"
+            exit={{ opacity: 0, y: -30 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-white max-w-4xl flex flex-col items-center"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel text-electric-teal text-xs font-medium tracking-widest uppercase mb-8">
-              <span className="w-2 h-2 rounded-full bg-electric-teal animate-pulse"></span>
-              Enterprise Automation
-            </div>
-            <h1 className="font-display text-5xl md:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
-              ABB Authorised <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-teal to-blue-400">Channel Partner</span>
+            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] mb-6 tracking-tight drop-shadow-2xl">
+              {CAROUSEL_SLIDES[currentSlide].title} <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-teal to-blue-400">
+                {CAROUSEL_SLIDES[currentSlide].highlight}
+              </span>
             </h1>
-            <p className="text-lg text-gray-400 mb-10 max-w-lg font-light leading-relaxed">
-              Delivering cutting-edge automation solutions, VFDs, PLCs, and custom control panels to optimize your industrial processes with precision.
+            
+            <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl font-light leading-relaxed drop-shadow-md">
+              {CAROUSEL_SLIDES[currentSlide].description}
             </p>
+            
             <motion.button 
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-electric-teal text-charcoal px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-white transition-all shadow-[0_4px_20px_rgba(0,229,255,0.2)] hover:shadow-[0_8px_30px_rgba(0,229,255,0.4)]"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-electric-teal text-charcoal px-8 py-4 rounded-full font-bold flex items-center gap-3 hover:bg-white transition-all shadow-[0_4px_20px_rgba(0,229,255,0.3)] hover:shadow-[0_8px_30px_rgba(0,229,255,0.5)]"
             >
               Explore Solutions <ArrowRight className="w-5 h-5" strokeWidth={2} />
             </motion.button>
           </motion.div>
-
-          {/* Image Grid / Composition */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="relative h-[550px] hidden lg:block"
-          >
-            {/* Floating Glass Panels */}
-            <div className="absolute top-4 right-4 w-64 h-64 glass-panel p-3 rounded-3xl transform rotate-3 hover:rotate-0 transition-all duration-500 z-20 hover:scale-105 hover:z-40">
-              <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&q=80&w=400&h=400" alt="PLC Systems" className="w-full h-full object-cover rounded-2xl" />
-            </div>
-            <div className="absolute bottom-4 left-4 w-56 h-56 glass-panel p-3 rounded-3xl transform -rotate-6 hover:rotate-0 transition-all duration-500 z-30 hover:scale-105 hover:z-40">
-              <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=400&h=400" alt="Drives" className="w-full h-full object-cover rounded-2xl" />
-            </div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 glass-panel p-3 rounded-3xl z-10 hover:scale-105 transition-all duration-500 hover:z-40">
-              <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&q=80&w=500&h=500" alt="Automation" className="w-full h-full object-cover rounded-2xl" />
-            </div>
-            
-            {/* Decorative elements */}
-            <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-electric-teal/20 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-500/20 rounded-full blur-3xl"></div>
-          </motion.div>
-
-        </div>
+        </AnimatePresence>
       </div>
     </div>
   );

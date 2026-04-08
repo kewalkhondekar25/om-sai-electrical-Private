@@ -1,11 +1,13 @@
+"use client";
 import { motion } from 'motion/react';
 import { Activity } from 'lucide-react';
+import Image from 'next/image';
 
 export default function About() {
   const stats = [
-    { number: '25', label: 'Years Experience' },
-    { number: '34', label: 'Projects Deployed' },
-    { number: '103', label: 'Enterprise Clients' },
+    { number: '20+', label: 'Years Experience' },
+    { number: '100+', label: 'Projects Deployed' },
+    { number: '50+', label: 'Enterprise Clients' },
   ];
 
   return (
@@ -60,16 +62,17 @@ export default function About() {
             className="relative"
           >
             <div className="bg-charcoal rounded-[2.5rem] p-3 shadow-2xl relative overflow-hidden border border-gray-800 group h-[600px]">
-              <div className="absolute inset-0 bg-gradient-to-b from-electric-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-electric-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10"></div>
               
-              <img 
-                src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?auto=format&fit=crop&q=80&w=800&h=1200" 
+              <Image 
+                src="/images/Pharma company water distributor panel.jpg" 
                 alt="Control Panel Interior" 
-                className="w-full h-full object-cover rounded-[2rem] transition-transform duration-1000 group-hover:scale-105"
+                fill
+                className="object-cover rounded-[2rem] transition-transform duration-1000 group-hover:scale-105"
               />
               
               {/* Simulated Live HMI Overlay */}
-              <div className="absolute bottom-8 left-8 right-8 glass-panel rounded-2xl p-5 flex flex-col gap-4">
+              <div className="absolute bottom-8 left-8 right-8 glass-panel rounded-2xl p-5 flex flex-col gap-4 z-20">
                 <div className="flex items-center justify-between border-b border-white/10 pb-3">
                   <div className="flex items-center gap-3">
                     <div className="w-2.5 h-2.5 rounded-full bg-electric-teal animate-pulse shadow-[0_0_10px_rgba(0,229,255,0.8)]"></div>

@@ -1,5 +1,7 @@
+"use client";
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Industries() {
   const industries = [
@@ -56,10 +58,11 @@ export default function Industries() {
             transition={{ duration: 0.8 }}
           >
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl h-[650px] group">
-              <img 
-                src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=1000&h=1000" 
-                alt="Industrial Plant" 
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+              <Image 
+                src="/images/cement-spreader-2.jpg" 
+                alt="Industrial Plant Automation" 
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
               {/* Cinematic cool-tone overlay */}
               <div className="absolute inset-0 bg-blue-900/40 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-30"></div>
