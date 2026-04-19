@@ -1,81 +1,63 @@
-"use client";
-import { motion } from 'motion/react';
-import { ArrowUpRight } from 'lucide-react';
-import Image from 'next/image';
+const INDUSTRIES = [
+  'Food & Beverage',
+  'Water & Wastewater',
+  'Chemical Processing',
+  'Packaging Systems',
+  'Pharmaceuticals',
+  'Marine & Offshore',
+  'Cranes & Hoists',
+  'Metals & Mining',
+  'Textile Manufacturing',
+  'HVACR Solutions',
+  'Rubber & Plastics',
+  'Infrastructure',
+]
+
+const ArrowIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+  </svg>
+)
 
 export default function Industries() {
-  const industries = [
-    "Food and Beverage",
-    "Water and Wastewater",
-    "Chemical Processing",
-    "Packaging Systems",
-    "HVACR Solutions",
-    "Marine and Offshore",
-    "Pharmaceuticals",
-    "Cranes and Hoists",
-    "Metals and Mining",
-    "Rubber and Plastics",
-    "Textile Manufacturing"
-  ];
-
   return (
-    <section className="py-32 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          
-          {/* Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-charcoal mb-12 tracking-tight">
-              Industries We <span className="text-electric-teal-dark">Serve</span>
+    <section className="section light" id="industries">
+      <div className="section-inner">
+        <div className="ind-grid">
+          <div className="fade-up">
+            <div className="s-tag" style={{ fontFamily: 'var(--fd)' }}>Sectors We Power</div>
+            <h2 className="s-title" style={{ fontFamily: 'var(--fd)' }}>
+              Industries We <span style={{ color: 'var(--td)' }}>Serve</span>
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6">
-              {industries.map((industry, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="flex items-center group cursor-default border-b border-gray-100 pb-4"
-                >
-                  <span className="text-gray-500 font-light text-lg group-hover:text-charcoal transition-colors flex-grow">{industry}</span>
-                  <ArrowUpRight className="w-5 h-5 text-gray-300 group-hover:text-electric-teal transition-colors" strokeWidth={1.5} />
-                </motion.div>
+            <p className="s-sub" style={{ marginBottom: 36 }}>
+              From pharmaceuticals to heavy manufacturing, our automation solutions power diverse sectors
+              with precision and reliability.
+            </p>
+            <div className="ind-list">
+              {INDUSTRIES.map((ind) => (
+                <div key={ind} className="ind-item" style={{ fontFamily: 'var(--fd)' }}>
+                  <ArrowIcon />
+                  {ind}
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          {/* Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl h-[650px] group">
-              <Image 
-                src="/images/cement-spreader-2.jpg" 
-                alt="Industrial Plant Automation" 
-                fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-105"
-              />
-              {/* Cinematic cool-tone overlay */}
-              <div className="absolute inset-0 bg-blue-900/40 mix-blend-overlay transition-opacity duration-500 group-hover:opacity-30"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/40 to-transparent flex items-end p-12">
-                <p className="text-white text-3xl font-display font-medium tracking-wide leading-tight">
-                  Powering diverse sectors with <span className="text-electric-teal">precision automation.</span>
+          <div className="ind-visual fade-right">
+            <div className="ind-img">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/cement-spreader-2.jpg" alt="Cement Spreader Automation" />
+              <div className="ind-img-grad" />
+              <div className="ind-caption">
+                <p>
+                  Powering diverse sectors with{' '}
+                  <em>precision automation.</em>
                 </p>
               </div>
             </div>
-          </motion.div>
-
+          </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

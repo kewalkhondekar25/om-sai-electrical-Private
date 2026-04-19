@@ -1,108 +1,82 @@
-"use client";
-import { motion } from 'motion/react';
-import { Mail, MapPin, Phone, ArrowRight } from 'lucide-react';
+import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="bg-charcoal text-gray-400 pt-20 pb-12 border-t border-white/5 relative overflow-hidden mt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* CTA Banner - Overlapping */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-charcoal-light rounded-[2.5rem] p-10 md:p-16 flex flex-col md:flex-row items-center justify-between shadow-2xl border border-white/5 relative mb-20 group overflow-hidden z-20"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-electric-teal/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-          <div className="relative z-10">
-            <h3 className="text-3xl md:text-4xl font-display font-bold text-white mb-4 tracking-tight">Ready to upgrade your systems?</h3>
-            <p className="text-gray-400 font-light">Connect with our engineering team for a consultation.</p>
-          </div>
-          <button className="mt-8 md:mt-0 bg-electric-teal text-charcoal px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-white transition-all shadow-[0_4px_20px_rgba(0,229,255,0.2)] hover:shadow-[0_8px_30px_rgba(0,229,255,0.4)] hover:-translate-y-1 relative z-10">
-            Contact Us <ArrowRight className="w-5 h-5" strokeWidth={2} />
-          </button>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
-          {/* Company Info */}
-          <div className="lg:col-span-2 pr-8">
-            <div className="flex items-center mb-8 cursor-pointer group">
-              <div className="w-[280px] h-20 flex items-center justify-center rounded-xl bg-white overflow-hidden flex-shrink-0 -ml-2">
-                <img src="https://res.cloudinary.com/kewalkhondekar/image/upload/v1774897473/labs/om-sai-electrical/om-sai-electrical-logo_ynrnqi.png" alt="Om Sai Electrical Logo" className="w-full h-full object-contain scale-[2.2]" />
-              </div>
+    <footer>
+      <div className="footer-inner">
+        <div className="footer-grid">
+          <div>
+            <div className="footer-logo-wrap">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/logo-cropped.png" alt="Om Sai Electrical" />
             </div>
-            <p className="text-sm leading-relaxed font-light text-gray-500 mb-6 max-w-sm">
-              Authorized ABB Channel Partner delivering premium automation solutions, VFDs, PLCs, and custom control panels for enterprise industries.
+            <p className="footer-about">
+              Authorized ABB Channel Partner delivering premium automation solutions, VFDs, PLCs,
+              and custom control panels for enterprise industries across India.
             </p>
-            <div className="text-xs font-medium text-electric-teal tracking-widest uppercase">
+            <div className="footer-cert" style={{ fontFamily: 'var(--fd)' }}>
               ISO 9001:2015 Certified
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="lg:col-span-1">
-            <h4 className="text-white font-display font-semibold text-lg mb-8 tracking-wide">Quick Links</h4>
-            <ul className="space-y-4 text-sm font-light">
-              {['Home', 'About Us', 'Clientele', 'Career', 'Contact Us', 'Enquiry'].map((link) => (
-                <li key={link}>
-                  <a href="#" className="hover:text-electric-teal transition-colors flex items-center gap-2 group">
-                    <span className="w-1 h-1 rounded-full bg-gray-700 group-hover:bg-electric-teal transition-colors"></span>
-                    {link}
-                  </a>
-                </li>
-              ))}
+          <div>
+            <div className="footer-heading" style={{ fontFamily: 'var(--fd)' }}>Quick Links</div>
+            <ul className="footer-links">
+              <li><Link href="/">Home</Link></li>
+              <li><Link href="/#about">About Us</Link></li>
+              <li><Link href="/projects">Projects</Link></li>
+              <li><Link href="/#industries">Industries</Link></li>
+              <li><Link href="/#contact">Contact</Link></li>
             </ul>
           </div>
 
-          {/* Products */}
-          <div className="lg:col-span-1">
-            <h4 className="text-white font-display font-semibold text-lg mb-8 tracking-wide">Products</h4>
-            <ul className="space-y-4 text-sm font-light">
-              {['ABB Drives', 'ABB PLC', 'ABB Soft Starters', 'ABB Switchgears', 'Control Panels', 'SCADA Systems'].map((product) => (
-                <li key={product}>
-                  <a href="#" className="hover:text-electric-teal transition-colors flex items-center gap-2 group">
-                    <span className="w-1 h-1 rounded-full bg-gray-700 group-hover:bg-electric-teal transition-colors"></span>
-                    {product}
-                  </a>
-                </li>
-              ))}
+          <div>
+            <div className="footer-heading" style={{ fontFamily: 'var(--fd)' }}>Products</div>
+            <ul className="footer-links">
+              <li><a href="#">ABB Drives</a></li>
+              <li><a href="#">ABB PLC</a></li>
+              <li><a href="#">Soft Starters</a></li>
+              <li><a href="#">Switchgears</a></li>
+              <li><a href="#">Control Panels</a></li>
+              <li><a href="#">SCADA Systems</a></li>
             </ul>
           </div>
 
-          {/* Contact */}
-          <div className="lg:col-span-1">
-            <h4 className="text-white font-display font-semibold text-lg mb-8 tracking-wide">Contact</h4>
-            <ul className="space-y-6 text-sm font-light">
-              <li className="flex items-start">
-                <MapPin className="w-5 h-5 mr-4 text-electric-teal flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span className="leading-relaxed">
-                  Office -: ground floor G-3 krushna kunj building, <br/>
-                  Tata Power, Kalyan, <br/>
-                  Thane, Mumbai, Maharashtra, <br/>
-                  India - 421306
-                </span>
+          <div>
+            <div className="footer-heading" style={{ fontFamily: 'var(--fd)' }}>Contact</div>
+            <ul className="footer-contact">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Ground Floor G-3, Krushna Kunj, Tata Power, Kalyan, Thane, Mumbai — 421306
               </li>
-              <li className="flex items-center">
-                <Phone className="w-5 h-5 mr-4 text-electric-teal flex-shrink-0" strokeWidth={1.5} />
-                <span className="leading-relaxed">+91 9867977353</span>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-5.99-5.99 19.79 19.79 0 01-3.07-8.63A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+                </svg>
+                +91 98679 77353
               </li>
-              <li className="flex items-center">
-                <Mail className="w-5 h-5 mr-4 text-electric-teal flex-shrink-0" strokeWidth={1.5} />
-                <span className="leading-relaxed">omsaielectrical4685@gmail.com</span>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                omsaielectrical4685@gmail.com
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-xs font-light">
+        <div className="footer-bottom">
           <p>&copy; {new Date().getFullYear()} Om Sai Electrical. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-electric-teal transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-electric-teal transition-colors">Terms of Service</a>
+          <div className="footer-btm-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms</a>
           </div>
         </div>
       </div>
     </footer>
-  );
+  )
 }

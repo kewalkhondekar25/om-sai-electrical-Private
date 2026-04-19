@@ -1,103 +1,146 @@
-"use client";
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
+'use client'
 
-const CAROUSEL_SLIDES = [
+import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
+
+const SLIDES = [
   {
-    image: '/images/AC drum manufacturing system machine and automation.jpg',
-    title: 'ABB Authorised',
-    highlight: 'Channel Partner',
-    description: 'Delivering cutting-edge automation solutions, VFDs, PLCs, and custom control panels to optimize your industrial processes with precision.'
+    img: '/images/AC%20drum%20manufacturing%20system%20machine%20and%20automation.jpg',
+    alt: 'AC Drum Automation',
+    title: 'Industrial<br/><em>Automation</em><br/>Redefined.',
+    sub: "20+ years of expertise delivering VFDs, PLCs, SCADA systems, and custom control panels for India's most demanding industries.",
   },
   {
-    image: '/images/Pharma company water distributor panel.jpg',
-    title: 'Advanced PLC &',
-    highlight: 'Drive Systems',
-    description: 'State-of-the-art programmable logic controllers and variable frequency drives for seamless industrial operations.'
+    img: '/images/Pharma%20company%20water%20distributor%20panel.jpg',
+    alt: 'Pharma Panel',
+    title: 'Precision <em>Control</em><br/>Systems Built<br/>to Last.',
+    sub: 'From pharmaceutical GMP panels to food-grade automation — engineered for reliability, compliance and long-term performance.',
   },
   {
-    image: '/images/Soap line automation plant1.jpg',
-    title: 'Industrial',
-    highlight: 'Automation',
-    description: 'End-to-end automation solutions from concept to commissioning for diverse manufacturing sectors.'
+    img: '/images/Soap%20line%20automation%20plant1.jpg',
+    alt: 'Soap Line Automation',
+    title: '<em>End-to-End</em><br/>Automation<br/>Solutions.',
+    sub: 'Concept to commissioning — we design, build, program, and commission complete automation systems.',
   },
   {
-    image: '/images/BA gallery fire training system.jpg',
-    title: 'Custom Control',
-    highlight: 'Panels',
-    description: 'Expertly designed and manufactured control panels meeting the highest international safety and quality standards.'
-  }
-];
+    img: '/images/BA%20gallery%20fire%20training%20system.jpg',
+    alt: 'Fire Training System',
+    title: 'Custom <em>Control</em><br/>Panels for<br/>Every Industry.',
+    sub: 'Bespoke ABB-powered panels crafted in our 10,000 sq. ft. MIDC facility with full in-house fabrication.',
+  },
+]
 
 export default function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [cur, setCur] = useState(0)
+  const [titleHtml, setTitleHtml] = useState(SLIDES[0].title)
+  const [subText, setSubText] = useState(SLIDES[0].sub)
+  const [titleVisible, setTitleVisible] = useState(true)
+  const imgRefs = useRef<(HTMLImageElement | null)[]>([])
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
+
+  function goSlide(n: number) {
+    const next = (n + SLIDES.length) % SLIDES.length
+    // Reset Ken Burns on the next slide's image
+    const img = imgRefs.current[next]
+    if (img) {
+      img.style.animation = 'none'
+      void img.offsetWidth // reflow
+      img.style.animation = ''
+    }
+    setCur(next)
+    setTitleVisible(false)
+    setTimeout(() => {
+      setTitleHtml(SLIDES[next].title)
+      setSubText(SLIDES[next].sub)
+      setTitleVisible(true)
+    }, 300)
+  }
+
+  function startTimer() {
+    if (timerRef.current) clearInterval(timerRef.current)
+    timerRef.current = setInterval(() => {
+      setCur((prev) => {
+        const next = (prev + 1) % SLIDES.length
+        goSlide(next)
+        return prev // goSlide handles the update
+      })
+    }, 5500)
+  }
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
-    }, 6000); // Change slide every 6 seconds
-    return () => clearInterval(interval);
-  }, []);
+    startTimer()
+    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
-    <div className="relative bg-charcoal overflow-hidden min-h-[85vh] flex items-center justify-center">
-      {/* Background Image Carousel */}
-      <div className="absolute inset-0 z-0">
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 0.5, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute inset-0"
-          >
-            <Image
-              src={CAROUSEL_SLIDES[currentSlide].image}
-              alt={CAROUSEL_SLIDES[currentSlide].title}
-              fill
-              className="object-cover"
-              priority
+    <section className="hero">
+      <div className="hero-slides">
+        {SLIDES.map((slide, i) => (
+          <div key={i} className={`hero-slide${i === cur ? ' active' : ''}`}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              ref={(el) => { imgRefs.current[i] = el }}
+              src={slide.img}
+              alt={slide.alt}
             />
-          </motion.div>
-        </AnimatePresence>
-        {/* Dark gradient overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/50 to-charcoal/90"></div>
+          </div>
+        ))}
+      </div>
+      <div className="hero-grad" />
+      <div className="hero-grad2" />
+      <div className="hero-dot-grid" />
+
+      <div className="hero-content">
+        <div className="hero-eyebrow" style={{ fontFamily: 'var(--fd)' }}>
+          <span className="eyebrow-dot" />
+          ABB Authorized Channel Partner
+        </div>
+        <h1
+          className="hero-title"
+          style={{
+            fontFamily: 'var(--fd)',
+            opacity: titleVisible ? 1 : 0,
+            transform: titleVisible ? 'none' : 'translateY(14px)',
+          }}
+          dangerouslySetInnerHTML={{ __html: titleHtml }}
+        />
+        <p
+          className="hero-sub"
+          style={{ opacity: titleVisible ? 1 : 0 }}
+        >
+          {subText}
+        </p>
+        <div className="hero-btns">
+          <Link href="/projects" className="btn-primary" style={{ fontFamily: 'var(--fd)' }}>
+            View Our Projects
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+            </svg>
+          </Link>
+          <Link href="/#about" className="btn-ghost" style={{ fontFamily: 'var(--fd)' }}>
+            Our Story
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </Link>
+        </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-20 flex flex-col items-center text-center mt-10">
-        <AnimatePresence mode="wait">
-          <motion.div 
-            key={currentSlide}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="text-white max-w-4xl flex flex-col items-center"
-          >
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.1] mb-6 tracking-tight drop-shadow-2xl">
-              {CAROUSEL_SLIDES[currentSlide].title} <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-teal to-blue-400">
-                {CAROUSEL_SLIDES[currentSlide].highlight}
-              </span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl font-light leading-relaxed drop-shadow-md">
-              {CAROUSEL_SLIDES[currentSlide].description}
-            </p>
-            
-            <motion.button 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-electric-teal text-charcoal px-8 py-4 rounded-full font-bold flex items-center gap-3 hover:bg-white transition-all shadow-[0_4px_20px_rgba(0,229,255,0.3)] hover:shadow-[0_8px_30px_rgba(0,229,255,0.5)]"
-            >
-              Explore Solutions <ArrowRight className="w-5 h-5" strokeWidth={2} />
-            </motion.button>
-          </motion.div>
-        </AnimatePresence>
+      <div className="hero-dots">
+        {SLIDES.map((_, i) => (
+          <div
+            key={i}
+            className={`hdot${i === cur ? ' active' : ''}`}
+            onClick={() => { goSlide(i); startTimer() }}
+          />
+        ))}
       </div>
-    </div>
-  );
+
+      <div className="hero-scroll-hint" style={{ fontFamily: 'var(--fd)' }}>
+        <div className="scroll-line" />
+        Scroll
+      </div>
+    </section>
+  )
 }

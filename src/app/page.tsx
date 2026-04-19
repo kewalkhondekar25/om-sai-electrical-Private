@@ -1,29 +1,34 @@
-import TopBar from '../components/TopBar';
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Strengths from '../components/Strengths';
-import Industries from '../components/Industries';
-import Applications from '../components/Applications';
-import Certificates from '../components/Certificates';
-import Clients from '../components/Clients';
-import Footer from '../components/Footer';
+import TopBar from '../components/TopBar'
+import Navbar from '../components/Navbar'
+import Hero from '../components/Hero'
+import TrustBar from '../components/TrustBar'
+import About from '../components/About'
+import FeaturedProjects from '../components/FeaturedProjects'
+import Industries from '../components/Industries'
+import Strengths from '../components/Strengths'
+import CTASection from '../components/CTASection'
+import Footer from '../components/Footer'
+import ScrollAnimations from '../components/ScrollAnimations'
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-electric-teal selection:text-charcoal">
+    <>
+      <ScrollAnimations />
       <TopBar />
-      <Navbar />
+      <Navbar activePage="home" />
       <main>
         <Hero />
+        <TrustBar />
         <About />
-        <Strengths />
+        <div className="section-divider" />
+        <FeaturedProjects />
+        <div className="section-divider" />
         <Industries />
-        <Applications />
-        <Certificates />
-        <Clients />
+        <div className="section-divider" />
+        <Strengths />
+        <CTASection />
       </main>
       <Footer />
-    </div>
-  );
+    </>
+  )
 }
