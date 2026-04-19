@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
-import TopBar from '../../components/TopBar'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import ScrollAnimations from '../../components/ScrollAnimations'
@@ -89,6 +88,8 @@ const PROJECTS: Project[] = [
     images: [
       '/images/BA%20gallery%20fire%20training%20system.jpg',
       '/images/BA%20gallery%20fire%20training%20system2.jpg',
+      '/images/BA%20gallery%20fire%20training%20system3.jpg',
+      '/images/BA%20gallery%20fire%20training%20system4.jpg',
     ],
     excerpt:
       'Advanced fire training systems for safe, realistic emergency response training — PLC-automated flame control, safety interlocks, and HMI-based monitoring.',
@@ -105,7 +106,7 @@ const PROJECTS: Project[] = [
     title: 'Perfume Tank System',
     cat: 'process',
     catLabel: 'Process Control',
-    images: ['/images/Perfume%20tank%20systems2.jpg'],
+    images: ['/images/Perfume%20tank%20systems.jpg', '/images/Perfume%20tank%20systems2.jpg', '/images/Perfume%20tank%20systems3.jpg'],
     excerpt:
       'High-quality perfume tank systems for efficient storage, mixing, and handling of fragrances — PLC-integrated with automated mixing, level monitoring, and HMI control.',
     desc: 'We offer high-quality perfume tank systems designed for efficient storage, mixing, and handling of fragrances. Our systems are integrated with advanced PLC automation panels to ensure precise control, consistency, and safe operations in perfume and cosmetic manufacturing. With features like automated mixing, level monitoring, and HMI-based control, our solutions improve productivity while maintaining product quality. Custom-built perfume tank systems tailored to meet the needs of fragrance and cosmetic industries across India.',
@@ -121,7 +122,7 @@ const PROJECTS: Project[] = [
     title: 'Cement Spreader System',
     cat: 'infrastructure',
     catLabel: 'Infrastructure',
-    images: ['/images/cement-spreader-1.jpg', '/images/cement-spreader-2.jpg'],
+    images: ['/images/cement-spreader-1.jpg', '/images/cement-spreader-2.jpg', '/images/cement-spreader-3.jpg', '/images/cement-spreader-4.jpg'],
     excerpt:
       'High-performance cement spreader systems for accurate, uniform material distribution — PLC-automated flow control, speed regulation, and HMI monitoring.',
     desc: 'We offer high-performance cement spreader systems designed for accurate and uniform material distribution in construction and industrial applications. Our systems are integrated with advanced PLC automation panels to ensure precise control, efficient operation, and minimal material wastage. With features like automated flow control, speed regulation, and HMI-based monitoring, our solutions enhance productivity and ensure consistent spreading quality. Custom cement spreading systems tailored to meet diverse project requirements across India.',
@@ -205,7 +206,6 @@ export default function ProjectsPage() {
   return (
     <>
       <ScrollAnimations />
-      <TopBar />
       <Navbar activePage="projects" />
 
       {/* PAGE HERO */}
@@ -272,7 +272,7 @@ export default function ProjectsPage() {
                 style={{ animationDelay: `${i * 0.07}s` }}
                 onClick={() => openModal(p.id)}
               >
-                <div className="pcard-img" style={{ height: 236 }}>
+                <div className="pcard-img">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={p.images[0]} alt={p.title} loading="lazy" />
                   <div className="pcard-img-ov" />

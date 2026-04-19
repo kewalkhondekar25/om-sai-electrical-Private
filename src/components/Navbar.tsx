@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import ContactModal from './ContactModal'
 
 interface NavbarProps {
   activePage?: 'home' | 'projects'
@@ -9,6 +10,7 @@ interface NavbarProps {
 
 export default function Navbar({ activePage = 'home' }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [contactOpen, setContactOpen] = useState(false)
 
   return (
     <>
@@ -37,9 +39,13 @@ export default function Navbar({ activePage = 'home' }: NavbarProps) {
               <span className="abb-badge-name" style={{ fontFamily: 'var(--fd)' }}>ABB</span>
               <span className="abb-badge-label" style={{ fontFamily: 'var(--fd)', marginTop: 1 }}>Partner</span>
             </div>
-            <a href="mailto:omsaielectrical4685@gmail.com" className="btn-nav" style={{ fontFamily: 'var(--fd)' }}>
+            <button
+              className="btn-nav"
+              style={{ fontFamily: 'var(--fd)', cursor: 'pointer', border: 'none' }}
+              onClick={() => setContactOpen(true)}
+            >
               Get in Touch
-            </a>
+            </button>
           </div>
 
           <button className="hamburger" onClick={() => setIsOpen(true)} aria-label="Open menu">
@@ -55,7 +61,20 @@ export default function Navbar({ activePage = 'home' }: NavbarProps) {
         <Link href="/projects" onClick={() => setIsOpen(false)}>Projects</Link>
         <Link href="/#industries" onClick={() => setIsOpen(false)}>Industries</Link>
         <Link href="/#contact" onClick={() => setIsOpen(false)}>Contact</Link>
+        <button
+          onClick={() => { setIsOpen(false); setContactOpen(true) }}
+          style={{
+            background: 'var(--t)', color: '#000', fontFamily: 'var(--fd)',
+            fontSize: 16, fontWeight: 700, padding: '14px 0',
+            border: 'none', cursor: 'pointer', textAlign: 'left',
+            borderBottom: '1px solid var(--border)',
+          }}
+        >
+          Get in Touch
+        </button>
       </div>
+
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </>
   )
 }

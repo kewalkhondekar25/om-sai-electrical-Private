@@ -1,4 +1,3 @@
-import TopBar from '../components/TopBar'
 import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import TrustBar from '../components/TrustBar'
@@ -14,7 +13,6 @@ export default function Page() {
   return (
     <>
       <ScrollAnimations />
-      <TopBar />
       <Navbar activePage="home" />
       <main>
         <Hero />
