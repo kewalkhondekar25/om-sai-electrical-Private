@@ -1,20 +1,23 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Om Sai Electrical
 
-# Run and deploy your AI Studio app
+Portfolio website for **Om Sai Electrical** — an ISO 9001:2015 certified, ABB Authorized Channel Partner specializing in industrial automation, VFDs, PLCs, SCADA systems, and custom control panels.
 
-This contains everything you need to run your app locally.
+Live: [om-sai-electrical-private.vercel.app](https://om-sai-electrical-private.vercel.app)
 
-View your app in AI Studio: https://ai.studio/apps/761247b0-c243-4a10-a73c-019be1d34bf5
+## Stack
+
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS v4
+
+## Pages
+
+- `/` — Landing page (Hero carousel, About, Featured Projects, Industries, Strengths, CTA)
+- `/projects` — Full project portfolio with filter tabs and modal lightbox
 
 ## Run Locally
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```bash
+npm install
+npm run dev
+```
